@@ -26,6 +26,11 @@ set autochdir
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 set scrolloff=5
 
+" use space instead  : in normal mode
+nmap <space> :
+" use jk instead Esc in insert mode 
+imap jk <Esc>
+
 " 语法高亮
 syntax on
 " 设置行号
@@ -55,12 +60,15 @@ Plug 'vim-airline/vim-airline'
 
 Plug 'preservim/nerdtree'
 " Error checking
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
-" " Auto Complete
+" Auto Complete
 Plug 'Valloric/YouCompleteMe'
 
 Plug 'nathanaelkane/vim-indent-guides'
+
+" Auto pair
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 
@@ -114,6 +122,11 @@ let g:ycm_python_binary_path = "/bin/python3"
 " ===
 " === ale
 " ===
+"自定义error和warning图标
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚡'
+""在vim自带的状态栏中整合ale
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']"
 let b:ale_linters = ['pylint']
 let b:ale_fixers = ['autopep8', 'yapf']
 
